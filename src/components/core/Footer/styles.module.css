@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 32px;
+    background-color: var(--surface);
+    padding: 8px 16px;
+    border: solid 0px var(--border);
+    border-top-width: 1px;
+}
+
+.mousePositionContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    cursor: default;
+}
