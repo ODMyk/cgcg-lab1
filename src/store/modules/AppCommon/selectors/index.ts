@@ -19,3 +19,13 @@ export const triangleSelector = createSelector(
   selectSelf,
   state => state.triangle,
 );
+
+export const canvasDimensionsSelector = createSelector(
+  selectSelf,
+  state => state.canvasDimensions,
+);
+
+export const isMouseInputEnabledSelector = createSelector(
+  selectSelf,
+  state => state.isMouseInputEnabled,
+);

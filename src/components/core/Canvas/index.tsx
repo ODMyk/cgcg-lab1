@@ -1,8 +1,11 @@
+import {CANVAS_SCALE} from 'constants/canvas';
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppCommonActions} from 'store/modules/AppCommon/actions';
 import {
+  canvasDimensionsSelector,
   convexHullSelector,
+  isMouseInputEnabledSelector,
   pointsSelector,
   triangleSelector,
 } from 'store/modules/AppCommon/selectors';
@@ -14,17 +17,24 @@ export function Canvas() {
   const points = useSelector(pointsSelector);
   const convexHull = useSelector(convexHullSelector);
   const maxTriangle = useSelector(triangleSelector);
+  const dimensions = useSelector(canvasDimensionsSelector);
+  const isMouseInputEnabled = useSelector(isMouseInputEnabledSelector);
+
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const [dimensions, setDimenstions] = React.useState({height: 0, width: 0});
+
+  const handleClick = () => {
+    if (isMouseInputEnabled) {
+      dispatch(AppCommonActions.ADD_POINT.START.create());
+    }
+  };
 
   useEffect(() => {
     if (containerRef.current) {
       const {width, height} = containerRef.current.getBoundingClientRect();
-      setDimenstions({
-        width,
-        height,
-      });
+      dispatch(
+        AppCommonActions.SET_CANVAS_DIMENSIONS.START.create({width, height}),
+      );
     }
   }, [containerRef]);
 
@@ -84,8 +94,9 @@ export function Canvas() {
       currentTarget?: {offsetTop: number};
     },
   ) => {
-    const x = event.clientX;
-    const y = event.clientY - (event.currentTarget?.offsetTop ?? 0);
+    const x = event.clientX * CANVAS_SCALE;
+    const y =
+      (event.clientY - (event.currentTarget?.offsetTop ?? 0)) * CANVAS_SCALE;
     dispatch(AppCommonActions.SET_POSITION.START.create({x, y}));
   };
 
@@ -93,10 +104,15 @@ export function Canvas() {
     <div ref={containerRef} className={styles.container}>
       <canvas
         ref={canvasRef}
-        height={dimensions.height}
-        width={dimensions.width}
+        height={(dimensions?.height ?? 0) * CANVAS_SCALE}
+        width={(dimensions?.width ?? 0) * CANVAS_SCALE}
         onMouseMove={onMouseMove}
         className={styles.canvas}
+        style={{
+          height: dimensions?.height,
+          width: dimensions?.width,
+        }}
+        onClick={handleClick}
       />
     </div>
   );

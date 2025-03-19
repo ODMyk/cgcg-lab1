@@ -11,10 +11,6 @@ const IMPORT_DATA = createAction('IMPORT_DATA', {
   SUCCESS: (points: Point[]) => points,
 });
 
-const SET_LINE = createAction('SET_LINE', {
-  START: (coefficients: {k: number; b: number}) => coefficients,
-});
-
 const SET_POSITION = createAction('SET_POSITION', {
   START: (position: Point) => position,
 });
@@ -33,12 +29,38 @@ const SAVE_SOLUTION = createAction('SAVE_SOLUTION', {
   SUCCESS: () => {},
 });
 
+const RANDOM_INPUT = createAction('RANDOM_INPUT', {
+  START: () => {},
+  SUCCESS: (points: Point[]) => points,
+});
+
+const SET_CANVAS_DIMENSIONS = createAction('SET_CANVAS_DIMENSIONS', {
+  START: (dimensions: {width: number; height: number}) => dimensions,
+});
+
+const CLEAR_SOLUTION = createAction('CLEAR_SOLUTION', {
+  START: () => {},
+  SUCCESS: () => {},
+});
+
+const ADD_POINT = createAction('ADD_POINT', {
+  START: () => {},
+  SUCCESS: (p: Point) => p,
+});
+
+const TOGGLE_MOUSE_INPUT = createAction('TOGGLE_MOUSE_INPUT', {
+  START: () => {},
+});
 
 export const AppCommonActions = Object.freeze({
+  TOGGLE_MOUSE_INPUT,
+  ADD_POINT,
+  CLEAR_SOLUTION,
+  SET_CANVAS_DIMENSIONS,
+  RANDOM_INPUT,
   SAVE_SOLUTION,
   CLEAR_CANVAS,
   SOLVE_TASK,
   IMPORT_DATA,
-  SET_LINE,
   SET_POSITION,
 });
