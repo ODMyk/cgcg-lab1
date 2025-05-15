@@ -21,8 +21,10 @@ export function Header() {
 
   const processDisabled = isMouseInputEnabled || !points.length;
 
-  const saveDisabled =
+  const saveSolutionDisabled =
     isMouseInputEnabled || convexHull === undefined || triangle === undefined;
+
+  const saveInputDisabled = isMouseInputEnabled || !points.length;
 
   const importDisabled = isMouseInputEnabled;
 
@@ -38,8 +40,12 @@ export function Header() {
     dispatch(AppCommonActions.SOLVE_TASK.START.create());
   };
 
-  const handleSave = () => {
+  const handleSaveSolution = () => {
     dispatch(AppCommonActions.SAVE_SOLUTION.START.create());
+  };
+
+  const handleSaveInput = () => {
+    dispatch(AppCommonActions.SAVE_INPUT.START.create());
   };
 
   const handleClear = () => {
@@ -82,11 +88,14 @@ export function Header() {
         <Button onClick={handleProcess} disabled={processDisabled}>
           Process
         </Button>
-        <Button onClick={handleRemoveSolution} disabled={saveDisabled}>
+        <Button onClick={handleRemoveSolution} disabled={saveSolutionDisabled}>
           Remove solution
         </Button>
-        <Button onClick={handleSave} disabled={saveDisabled}>
-          Save
+        <Button onClick={handleSaveInput} disabled={saveInputDisabled}>
+          Save input
+        </Button>
+        <Button onClick={handleSaveSolution} disabled={saveSolutionDisabled}>
+          Save solution
         </Button>
       </div>
     </nav>

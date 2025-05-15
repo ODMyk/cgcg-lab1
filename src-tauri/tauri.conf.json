@@ -3,6 +3,7 @@
   "productName": "CGCG Lab 1",
   "version": "0.1.0",
   "identifier": "com.cgcglab1.app",
+  "mainBinaryName": "CGCG Lab 1",
   "build": {
     "beforeDevCommand": "yarn dev",
     "devUrl": "http://localhost:1420",

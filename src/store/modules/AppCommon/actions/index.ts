@@ -29,6 +29,11 @@ const SAVE_SOLUTION = createAction('SAVE_SOLUTION', {
   SUCCESS: () => {},
 });
 
+const SAVE_INPUT = createAction('SAVE_INPUT', {
+  START: () => {},
+  SUCCESS: () => {},
+});
+
 const RANDOM_INPUT = createAction('RANDOM_INPUT', {
   START: () => {},
   SUCCESS: (points: Point[]) => points,
@@ -63,4 +68,5 @@ export const AppCommonActions = Object.freeze({
   SOLVE_TASK,
   IMPORT_DATA,
   SET_POSITION,
+  SAVE_INPUT,
 });
